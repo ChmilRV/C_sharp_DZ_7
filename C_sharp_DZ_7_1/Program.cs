@@ -106,6 +106,33 @@ namespace C_sharp_DZ_7_1
             }
             return s;
         }
+        public static Money operator ++(Money s1)
+        {
+            Money s = new Money
+            {
+                Bills = s1.Bills,
+                Coins = s1.Coins + 1
+            };
+            return s;
+        }
+        public static Money operator --(Money s1)
+        {
+            Money s = new Money();
+            try
+            {
+                s.Bills = s1.Bills;
+                s.Coins = s1.Coins - 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
+            return s;
+        }
+
+
+
+
         public override string ToString()
         {
             if (Bills != 0) return $"{Bills} гр. {Coins:D2} коп.";
@@ -137,9 +164,15 @@ namespace C_sharp_DZ_7_1
             Money Sum_7 = new Money(5, 75);
             int m = 3;
             Console.WriteLine($"{Sum_7} / {m} = {Sum_7 / m}\n");
-            Money Sum_8 = new Money(10, 35);
+            Money Sum_8 = new Money(0, 0);
             int k = 0;
             Console.WriteLine($"{Sum_8} / {k} = {Sum_8 / k}\n");
+            Console.WriteLine($"{Sum_7} ++ = {++Sum_7}\n");
+            Console.WriteLine($"{Sum_8} -- = {--Sum_8}\n");
+
+
+
+
             Console.ReadKey();
         }
     }
