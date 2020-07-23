@@ -66,15 +66,15 @@ namespace C_sharp_DZ_7_1
         public static Money operator -(Money s1, Money s2)
         {
             Money s = new Money();
-            try
-            {
+            //try
+            //{
                 s.Bills = s1.Bills - s2.Bills;
                 s.Coins = s1.Coins - s2.Coins;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"{ex.Message}");
-            }           
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"{ex.Message}");
+            //}           
             return s;
         }
         public static Money operator *(Money s1, int n)
@@ -93,17 +93,17 @@ namespace C_sharp_DZ_7_1
         public static Money operator /(Money s1, int n)
         {
             Money s = new Money();
-            try
-            {
+            //try
+            //{
                 int tempCoins = s1.Bills * 100 + s1.Coins;
                 tempCoins /= n;
                 s.Coins = tempCoins % 100;
                 s.Bills = (tempCoins - s.Coins) / 100;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"{ex.Message}");
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"{ex.Message}");
+            //}
             return s;
         }
         public static Money operator ++(Money s1)
@@ -118,15 +118,15 @@ namespace C_sharp_DZ_7_1
         public static Money operator --(Money s1)
         {
             Money s = new Money();
-            try
-            {
+            //try
+            //{
                 s.Bills = s1.Bills;
                 s.Coins = s1.Coins - 1;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"{ex.Message}");
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"{ex.Message}");
+            //}
             return s;
         }
         public static bool operator >(Money s1, Money s2)
@@ -165,29 +165,44 @@ namespace C_sharp_DZ_7_1
         static void Main(string[] args)
         {
             Console.Title = "Домашнее задание №7. Класс Money.";
-            Money Sum_1 = new Money(10, 25);
-            Money Sum_2 = new Money(12, 90);
-            Console.WriteLine($"{Sum_1} + {Sum_2} = {Sum_1+Sum_2}\n");
-            Money Sum_3 = new Money(12, 99);
-            Money Sum_4 = new Money(3, 00);
-            Console.WriteLine($"{Sum_3} - {Sum_4} = {Sum_3 - Sum_4}\n");
-            Console.WriteLine($"{Sum_4} - {Sum_3} = {Sum_4 - Sum_3}\n");
-            Money Sum_5 = new Money(15, 25);
-            int n = 5;
-            Console.WriteLine($"{Sum_5} * {n} = {Sum_5 * n}\n");
-            Console.WriteLine($"{n} * {Sum_5} = {n * Sum_5}\n");
-            Money Sum_6 = new Money(12, 70);
-            int r = 3;
-            Console.WriteLine($"{Sum_6} / {r} = {Sum_6 / r}\n");
-            Money Sum_7 = new Money(5, 75);
-            int m = 3;
-            Console.WriteLine($"{Sum_7} / {m} = {Sum_7 / m}\n");
-            Money Sum_8 = new Money(0, 0);
-            int k = 0;
-            Console.WriteLine($"{Sum_8} / {k} = {Sum_8 / k}\n");
-            Console.WriteLine($"{Sum_7} ++ = {++Sum_7}\n");
-            Console.WriteLine($"{Sum_8} -- = {--Sum_8}\n");
 
+            
+            try
+            {
+                Money Sum_1 = new Money(10, 25);
+                Money Sum_2 = new Money(12, 90);
+                Console.WriteLine($"{Sum_1} + {Sum_2} = {Sum_1 + Sum_2}\n");
+                Money Sum_3 = new Money(12, 99);
+                Money Sum_4 = new Money(3, 00);
+                Console.WriteLine($"{Sum_3} - {Sum_4} = {Sum_3 - Sum_4}\n");
+                //Console.WriteLine($"{Sum_4} - {Sum_3} = {Sum_4 - Sum_3}\n");
+                Money Sum_5 = new Money(15, 25);
+                int n = 5;
+                Console.WriteLine($"{Sum_5} * {n} = {Sum_5 * n}\n");
+                Console.WriteLine($"{n} * {Sum_5} = {n * Sum_5}\n");
+                Money Sum_6 = new Money(12, 70);
+                int r = 3;
+                Console.WriteLine($"{Sum_6} / {r} = {Sum_6 / r}\n");
+                Money Sum_7 = new Money(5, 75);
+                int m = 3;
+                Console.WriteLine($"{Sum_7} / {m} = {Sum_7 / m}\n");
+                Money Sum_8 = new Money(0, 0);
+                int k = 0;
+                Console.WriteLine($"{Sum_8} / {k} = {Sum_8 / k}\n");
+                Console.WriteLine($"{Sum_7} ++ = {++Sum_7}\n");
+                Console.WriteLine($"{Sum_8} -- = {--Sum_8}\n");
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
+           
+
+
+
+            
 
 
 
