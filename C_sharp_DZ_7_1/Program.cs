@@ -25,7 +25,7 @@ namespace C_sharp_DZ_7_1
                 if (value > 0) bills = value;
                 if (value < 0) 
                 { 
-                    throw new Exception("Банкрот"); 
+                    throw new Exception("Банкрот");
                 }
             }
         }
@@ -129,19 +129,37 @@ namespace C_sharp_DZ_7_1
             }
             return s;
         }
-
-
-
-
+        public static bool operator >(Money s1, Money s2)
+        {
+            return (s1.Bills*100+s1.Coins) > (s2.Bills * 100 + s2.Coins);
+        }
+        public static bool operator <(Money s1, Money s2)
+        {
+            return (s1.Bills * 100 + s1.Coins) < (s2.Bills * 100 + s2.Coins);
+        }
+        public static bool operator ==(Money s1, Money s2)
+        {
+            return s1.Equals(s2);
+        }
+        public static bool operator !=(Money s1, Money s2)
+        {
+            return !(s1 == s2);
+        }
+        public override bool Equals(object obj)
+        {
+            Money s = (Money)obj;
+            return (Bills == s.Bills && Coins == s.Coins);
+        }
+        public override int GetHashCode()
+        {
+            return (Convert.ToInt32((Bills ^ Coins) & 0xFFFFFFFF));
+        }
         public override string ToString()
         {
             if (Bills != 0) return $"{Bills} гр. {Coins:D2} коп.";
             else return $"{Coins:D2} коп.";
         }
-
     }
-
-
     class Program
     {
         static void Main(string[] args)
