@@ -65,16 +65,11 @@ namespace C_sharp_DZ_7_1
 
         public static Money operator -(Money s1, Money s2)
         {
-            Money s = new Money();
-            //try
-            //{
-                s.Bills = s1.Bills - s2.Bills;
-                s.Coins = s1.Coins - s2.Coins;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine($"{ex.Message}");
-            //}           
+            Money s = new Money
+            {
+                Bills = s1.Bills - s2.Bills,
+                Coins = s1.Coins - s2.Coins
+            };
             return s;
         }
         public static Money operator *(Money s1, int n)
@@ -93,17 +88,10 @@ namespace C_sharp_DZ_7_1
         public static Money operator /(Money s1, int n)
         {
             Money s = new Money();
-            //try
-            //{
-                int tempCoins = s1.Bills * 100 + s1.Coins;
-                tempCoins /= n;
-                s.Coins = tempCoins % 100;
-                s.Bills = (tempCoins - s.Coins) / 100;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine($"{ex.Message}");
-            //}
+            int tempCoins = s1.Bills * 100 + s1.Coins;
+            tempCoins /= n;
+            s.Coins = tempCoins % 100;
+            s.Bills = (tempCoins - s.Coins) / 100;
             return s;
         }
         public static Money operator ++(Money s1)
@@ -117,16 +105,11 @@ namespace C_sharp_DZ_7_1
         }
         public static Money operator --(Money s1)
         {
-            Money s = new Money();
-            //try
-            //{
-                s.Bills = s1.Bills;
-                s.Coins = s1.Coins - 1;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine($"{ex.Message}");
-            //}
+            Money s = new Money
+            {
+                Bills = s1.Bills,
+                Coins = s1.Coins - 1
+            };
             return s;
         }
         public static bool operator >(Money s1, Money s2)
@@ -159,54 +142,163 @@ namespace C_sharp_DZ_7_1
             if (Bills != 0) return $"{Bills} гр. {Coins:D2} коп.";
             else return $"{Coins:D2} коп.";
         }
+        public Money EnterSum()
+        {
+            Money Sum = new Money();
+            Console.Write("Гривны: ");
+            if (Int32.TryParse(Console.ReadLine(), out int SumBills))
+            {
+                Sum.Bills = SumBills;
+            }
+            else
+            {
+                throw new Exception("Некорректный ввод суммы.");
+            }
+            Console.Write("Копейки: ");
+            if (Int32.TryParse(Console.ReadLine(), out int SumCoins))
+            {
+                Sum.Coins = SumCoins;
+            }
+            else
+            {
+                throw new Exception("Некорректный ввод суммы.");
+            }
+            return Sum;
+        }
     }
     class Program
     {
         static void Main(string[] args)
         {
             Console.Title = "Домашнее задание №7. Класс Money.";
-
-            
-            try
+            bool _exit = true;
+            do
             {
-                Money Sum_1 = new Money(10, 25);
-                Money Sum_2 = new Money(12, 90);
-                Console.WriteLine($"{Sum_1} + {Sum_2} = {Sum_1 + Sum_2}\n");
-                Money Sum_3 = new Money(12, 99);
-                Money Sum_4 = new Money(3, 00);
-                Console.WriteLine($"{Sum_3} - {Sum_4} = {Sum_3 - Sum_4}\n");
-                //Console.WriteLine($"{Sum_4} - {Sum_3} = {Sum_4 - Sum_3}\n");
-                Money Sum_5 = new Money(15, 25);
-                int n = 5;
-                Console.WriteLine($"{Sum_5} * {n} = {Sum_5 * n}\n");
-                Console.WriteLine($"{n} * {Sum_5} = {n * Sum_5}\n");
-                Money Sum_6 = new Money(12, 70);
-                int r = 3;
-                Console.WriteLine($"{Sum_6} / {r} = {Sum_6 / r}\n");
-                Money Sum_7 = new Money(5, 75);
-                int m = 3;
-                Console.WriteLine($"{Sum_7} / {m} = {Sum_7 / m}\n");
-                Money Sum_8 = new Money(0, 0);
-                int k = 0;
-                Console.WriteLine($"{Sum_8} / {k} = {Sum_8 / k}\n");
-                Console.WriteLine($"{Sum_7} ++ = {++Sum_7}\n");
-                Console.WriteLine($"{Sum_8} -- = {--Sum_8}\n");
-
-
+                try
+                {
+                    Console.WriteLine("Демонстрация возможностей класса Money.");
+                    Console.WriteLine("Предназначен для хранения и обработки денежых сумм (в гривнах и копейках).");
+                    Console.WriteLine("Варианты использования:");
+                    Console.WriteLine("1 - Сложение денежных сумм.");
+                    Console.WriteLine("2 - Вычитание денежных сумм.");
+                    Console.WriteLine("3 - Деление суммы на целое число.");
+                    Console.WriteLine("4 - Умножение суммы на целое число.");
+                    Console.WriteLine("5 - Сумма увеличивается на 1 копейку.");
+                    Console.WriteLine("6 - Сумма уменьшается на 1 копейку.");
+                    Console.WriteLine("7 - Сравнение двух сумм.");
+                    Console.WriteLine("e - Выход.");
+                    Console.Write("Введите вариант использования: ");
+                    string selection = Console.ReadLine();
+                    switch (selection)
+                    {
+                        case "1":
+                            Console.WriteLine("Введите первую сумму:");
+                            Money Sum_1 = new Money();
+                            Sum_1 = Sum_1.EnterSum();
+                            Console.WriteLine("Введите вторую сумму:");
+                            Money Sum_2 = new Money();
+                            Sum_2 = Sum_2.EnterSum();
+                            Console.WriteLine($"{Sum_1} + {Sum_2} = {Sum_1 + Sum_2}");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case "2":
+                            Console.WriteLine("Введите первую сумму:");
+                            Money Sum_3 = new Money();
+                            Sum_3 = Sum_3.EnterSum();
+                            Console.WriteLine("Введите вторую сумму:");
+                            Money Sum_4 = new Money();
+                            Sum_4 = Sum_4.EnterSum();
+                            Console.WriteLine($"{Sum_3} - {Sum_4} = {Sum_3 - Sum_4}");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case "3":
+                            Console.WriteLine("Введите первую сумму:");
+                            Money Sum_5 = new Money();
+                            Sum_5 = Sum_5.EnterSum();
+                            Console.WriteLine("Введите целое число:");
+                            if (Int32.TryParse(Console.ReadLine(), out int n))
+                            {
+                                Console.WriteLine($"{Sum_5} / {n} = {Sum_5 / n}");
+                            }
+                            else
+                            {
+                                throw new Exception("Некорректный ввод числа.");
+                            }
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case "4":
+                            Console.WriteLine("Введите первую сумму:");
+                            Money Sum_6 = new Money();
+                            Sum_6 = Sum_6.EnterSum();
+                            Console.WriteLine("Введите целое число:");
+                            if (Int32.TryParse(Console.ReadLine(), out int m))
+                            {
+                                Console.WriteLine($"{Sum_6} * {m} = {Sum_6 * m}");
+                            }
+                            else
+                            {
+                                throw new Exception("Некорректный ввод числа.");
+                            }
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case "5":
+                            Console.WriteLine("Введите сумму:");
+                            Money Sum_7 = new Money();
+                            Sum_7 = Sum_7.EnterSum();
+                            Console.WriteLine($"{Sum_7} + 1 коп. = {++Sum_7}");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case "6":
+                            Console.WriteLine("Введите сумму:");
+                            Money Sum_8 = new Money();
+                            Sum_8 = Sum_8.EnterSum();
+                            Console.WriteLine($"{Sum_8} - 1 коп. = {--Sum_8}");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case "7":
+                            Console.WriteLine("Введите первую сумму:");
+                            Money Sum_9 = new Money();
+                            Sum_9 = Sum_9.EnterSum();
+                            Console.WriteLine("Введите вторую сумму:");
+                            Money Sum_10 = new Money();
+                            Sum_10 = Sum_10.EnterSum();
+                            if (Sum_9 > Sum_10) Console.WriteLine($"{Sum_9} больше {Sum_10}.");
+                            if (Sum_9 < Sum_10) Console.WriteLine($"{Sum_9} меньше {Sum_10}.");
+                            if (Sum_9 == Sum_10) Console.WriteLine($"{Sum_9} равна {Sum_10}.");
+                            if (Sum_9 != Sum_10) Console.WriteLine($"{Sum_9} не равна {Sum_10}.");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case "e":
+                        case "у":
+                            Console.WriteLine("Завершение программы.\nPress any key to continue...");
+                            Console.ReadKey();
+                            _exit = false;
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"{ex.Message}");
-            }
-           
-
-
-
-            
-
-
-
-            Console.ReadKey();
+            while (_exit);
         }
     }
 }
